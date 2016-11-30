@@ -23,7 +23,9 @@ The examples are deliberately concrete, referring to specific projects, to ident
 
 * Run Hoogle. Note that network has a configure script, which may not always work on Windows.
 
-* Upgrade your version of HLint and Hoogle.
+* Upgrade your version of HLint and Hoogle to the latest released version.
+
+* Use a package directly from github that isn't yet released to Hackage.
 
 * Get a stack trace on errors for your project.
 
