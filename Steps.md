@@ -11,24 +11,36 @@ It's a marathon, not a sprint. Trying to do step 2 before step 1 is likely to re
 
 The examples are deliberately concrete, referring to specific projects, to identify specific challenges. That will change before the end.
 
-* Execute 1+1 in GHCi
+To give specific instructions, I'm using the acronyms "MP" for minimal platform, "S" for Stack. I'm using "Win"/"Lin"/"Mac" when I have reason to believe the instructions are not the same. I've put things that suck in _italics_.
 
-* Create a file HelloWorld with `main = putStrLn "Hello world"` and run it.
+## Get "Haskell"
 
-* Parse a JSON fragment in GHCi using the aeson library.
+MP-Win: Go to https://www.haskell.org/platform/windows.html. Choose 64bit (_or 32bit_). Run the installer. _Modify your cabal config file._ _Start WinGHCi (let's be a little cross platform)._
 
-* Create a new project depending on aeson.
+## Execute 1+1 in GHCi
 
-* Run HLint over HelloWorld. Note that haskell-src-exts requires happy to be available.
+MP: On the console type `ghci`. Type 1+1.
 
-* Run Hoogle. Note that network has a configure script, which may not always work on Windows.
+## Create a file HelloWorld with `main = putStrLn "Hello world"` and run it.
 
-* Upgrade your version of HLint and Hoogle to the latest released version.
+MP: Save file as HelloWorld.hs. Type `runhaskell HelloWorld.hs`.
 
-* Use a package directly from github that isn't yet released to Hackage.
+## Parse a JSON fragment in GHCi using the aeson library.
 
-* Get a stack trace on errors for your project.
+MP: `cabal install aeson`.
 
-* Profile your project, both heap profiling and time profiling.
+## Create a new project depending on aeson.
 
-* View local documentation.
+## Run HLint over HelloWorld. Note that haskell-src-exts requires happy to be available.
+
+## Run Hoogle. Note that network has a configure script, which may not always work on Windows.
+
+## Upgrade your version of HLint and Hoogle to the latest released version.
+
+## Use a package directly from github that isn't yet released to Hackage.
+
+## Get a stack trace on errors for your project.
+
+## Profile your project, both heap profiling and time profiling.
+
+## View local documentation.
