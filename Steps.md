@@ -17,11 +17,15 @@ To give specific instructions, I'm using the acronyms "MP" for minimal platform,
 
 MP-Win: Go to https://www.haskell.org/platform/windows.html. Choose 64bit (_or 32bit_). Run the installer. _Modify your cabal config file._ Start WinGHCi (_which means Win users have a different experience - it's 2009 code hosted on code.google - a terrible impression - and doesn't get indexed by the Start Menu for some reason - let's pretend this didn't happen)._ _Goes through 2 installers (Stack and other)._ _Requires admin._ _Install process is very slow (should benchmark properly)._
 
+S: Download stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows (_in one of about a million ways_). Type `stack setup`.
+
 N: `nix-shell -p ghc` (to use it from a subshell) or `nix-env -i ghc` (to install it in the user's environment).  _Using the name `haskell` instead of `ghc` in either case produces an error._
 
 ## Execute 1+1 in GHCi
 
 MP: On the console type `ghci`. Type 1+1.
+
+S: On the console type `stack ghci`. Type 1+1.
 
 N: Same as MP.
 
