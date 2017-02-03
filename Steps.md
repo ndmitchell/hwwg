@@ -102,3 +102,8 @@ N: `nix-shell -p haskell.packages.ghc7103.ghc`.  _The syntax is not as clean as 
 ## View local documentation.
 
 N: `nix-shell -p 'haskellPackages.ghcWithHoogle (p: [ p.aeson ])'` will build a local Hoogle database; local haddocks can be retrieved using `ghc-pkg field $packageName haddock-html`.
+
+## Deploy in a locked down environment
+
+E.g. a company or university, where the system administrators may have rules about distro packages or website access.
+
