@@ -107,3 +107,6 @@ N: `nix-shell -p 'haskellPackages.ghcWithHoogle (p: [ p.aeson ])'` will build a 
 
 E.g. a company or university, where the system administrators may have rules about distro packages or website access.
 
+## Deploy to many users
+
+E.g. a whole student classroom.
