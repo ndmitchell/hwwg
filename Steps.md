@@ -107,6 +107,8 @@ N: `nix-shell -p 'haskellPackages.ghcWithHoogle (p: [ p.aeson ])'` will build a 
 
 E.g. a company or university, where the system administrators may have rules about distro packages or website access.
 
+N: https://nixos.org/wiki/How_to_install_nix_in_home_(on_another_distribution)
+
 ## Deploy to many users
 
 E.g. a whole student classroom.
