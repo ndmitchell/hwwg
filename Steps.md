@@ -19,7 +19,7 @@ MP-Win: Go to https://www.haskell.org/platform/windows.html. Choose 64bit (_or 3
 
 S: Download stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows (_in one of about a million ways_). Type `stack setup`.
 
-N: `nix-shell -p ghc` (to use it from a subshell) or `nix-env -i ghc` (to install it in the user's environment).  _Using the name `haskell` instead of `ghc` in either case produces an error._
+N: `nix-shell -p ghc` (to use it from a subshell) or `nix-env -i ghc` (to install it in the user's environment).  _Using the name `haskell` instead of `ghc` in either case produces an error._ _Works on Mac/Linux; does not support Windows at all._
 
 ## Execute 1+1 in GHCi
 
