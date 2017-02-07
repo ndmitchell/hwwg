@@ -33,7 +33,29 @@ N: Same as MP.
 
 MP: Save file as HelloWorld.hs. Type `runhaskell HelloWorld.hs`.
 
+S: Save file as HelloWorld.hs Type `stack runhaskell HelloWorld.hs`
+
 N: Same as MP.
+
+## Create a haskell program and run it as a script (OSX, Linux, BSD only)
+
+S: Create a file HelloWorld.hs:
+
+```haskell
+#!/usr/bin/env stack
+-- stack --install-ghc runghc
+module Main where
+main = putStrLn "Hello World"
+```
+
+and mark it executable, and run:
+
+```sh
+chmod +x HelloWorld.hs
+./HelloWorld.hs
+```
+
+See [script-interpreter](https://docs.haskellstack.org/en/stable/GUIDE/#script-interpreter) for more documentation
 
 ## Parse a JSON fragment in GHCi using the aeson library.
 
@@ -85,11 +107,25 @@ cabal2nix https://github.com/ryantrinkle/NotOnHackage > NotOnHackage.nix
 nix-shell -p 'haskellPackages.ghcWithPackages (p: [ (p.callPackage ./NotOnHackage.nix {}) ])'
 ```
 
+S:
+
+In the `packages` section of the `stack.yaml`, add the following:
+
+```
+- location:
+    git: https://path/to/my/repo
+    commit: <some commit or branch name>
+  extra-dep: true
+```
+
+
 ## Get a stack trace on errors for your project.
 
 N: `nix-shell -p '(haskellPackages.override { overrides = self: super: { mkDerivation = args: super.mkDerivation (args // { enableLibraryProfiling = true; enableExecutableProfiling = true; }); }; }).ghcWithPackages (p: [ p.aeson ])'`
 
 _This is a non-starter for anyone without a heavy investment in Nix.  Even if you have the deep knowledge of Nix's Haskell integration necessary to formulate this, it's extremely inconvenient.  In practice, most projects seem to have a flag somewhere in their own configuration that enables this, but it really ought to be made easier upstream._
+
+S: build your project with profiling `stack build --profile` and run the program
 
 ## Profile your project, both heap profiling and time profiling.
 
@@ -98,6 +134,18 @@ N: See "Get a stack trace"; then, proceed with standard GHC commands.
 ## Switch between multiple compiler versions
 
 N: `nix-shell -p haskell.packages.ghc7103.ghc`.  _The syntax is not as clean as the normal one; perhaps ghc7103 could be added as a top-level package in nixpkgs._
+
+S: Stack uses resolvers to compile with certain versions of the compiler.
+
+e.g. to build with ghc 7.8.4:
+
+`stack build --resolver lts-2.22`
+
+or ghc 7.10.3:
+
+`stack build --resolver lts-6.30`
+
+see [stackage](https://www.stackage.org/) for the list of resolver
 
 ## View local documentation.
 
@@ -109,6 +157,18 @@ E.g. a company or university, where the system administrators may have rules abo
 
 N: https://nixos.org/wiki/How_to_install_nix_in_home_(on_another_distribution)
 
+S: Stack install without system priviledges provided its lightweight dependencies requirements are met. you just need to run the command:
+
+`curl -sSL https://get.haskellstack.org/ | sh`
+
+or:
+
+`wget -qO- https://get.haskellstack.org/ | sh`
+
+S-Windows: TODO
+
 ## Deploy to many users
 
 E.g. a whole student classroom.
+
+S: See "Deploy in a locked down environment", having no need for user priviledges and a really simple 1 line setup, this can be run by users directly as initial step of a setup/class/etc.
