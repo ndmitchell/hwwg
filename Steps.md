@@ -17,7 +17,7 @@ To give specific instructions, I'm using the acronyms "MP" for minimal platform,
 
 MP-Win: Go to https://www.haskell.org/platform/windows.html. Choose 64bit (_or 32bit_). Run the installer. _Modify your cabal config file._ Start WinGHCi (_which means Win users have a different experience - it's 2009 code hosted on code.google - a terrible impression - and doesn't get indexed by the Start Menu for some reason - let's pretend this didn't happen)._ _Goes through 2 installers (Stack and other)._ _Requires admin._ _Install process is very slow (should benchmark properly)._
 
-S: Download stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows (_in one of about a million ways_). Type `stack setup`.
+S: Download stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows (_in one of about a million ways (BUG)[https://github.com/commercialhaskell/stack/issues/3207]_). Type `stack setup`.
 
 N: `nix-shell -p ghc` (to use it from a subshell) or `nix-env -i ghc` (to install it in the user's environment).  _Using the name `haskell` instead of `ghc` in either case produces an error._ _Works on Mac/Linux; does not support Windows at all._
 
@@ -66,17 +66,18 @@ $ import Data.Aeson
 $ :set -XOverloadedStrings
 $ decode "[1]" :: Maybe [Int]
 ```
+
+S: `stack ghci --package=aeson` then run the same commands inside `ghci` as for MP.
+
 N: `nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.aeson ])'`, run GHCi, and then run the same steps inside GHCi as for MP.  _Formulating this expression requires the user to understand a good deal of the nix programming language, and relies on proper escaping of the shell command argument, which is full of spaces and symbols._
 
 ## Create a new project depending on aeson.
 
 ## Run HLint over HelloWorld. Note that haskell-src-exts requires happy to be available.
 
-MP: `cabal install hlint`.
+MP: `cabal install hlint` then `hlint Main.hs`.
 
-```
-hlint Main.hs
-```
+S: 
 
 N: `nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.hlint ])'`, then `hlint Main.hs`.
 
@@ -94,6 +95,8 @@ _Insecure because the certificate bundle isn't found._
 N: `nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.hoogle ])'`, then same as MP, except there is no need for insecure.
 
 ## Upgrade your version of HLint and Hoogle to the latest released version.
+
+S: Go to http://stackage.org and look up the latest nightly or LTS. Insert it into your `C:\Users\Neil\AppData\Roaming\stack\global-project\stack.yaml` file against the `resolver` line. Type `stack install hlint` as before.
 
 N: `nix-channel --update`, then exit and re-enter any open nix-shells.  Note: "latest released versions" in this case will mean "latest that have been certified and built by the channel maintainers".  _It is possible to build with newer releases, but requires a solid understanding of Nix._
 
