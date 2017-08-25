@@ -68,13 +68,20 @@ See [script-interpreter](https://docs.haskellstack.org/en/stable/GUIDE/#script-i
 
 ## 5. Parse a JSON fragment in GHCi using the aeson library.
 
-MP: `cabal update` (_not doing that takes a long time and says do it twice_). `cabal install aeson` (_watch lots of warnings using the word "unsafe" scroll past_). `ghci`.
-
+MP:
+```
+cabal install aeson
+ghci
+```
 ```
 $ import Data.Aeson
 $ :set -XOverloadedStrings
 $ decode "[1]" :: Maybe [Int]
 ```
+
+Notes:
+`cabal update` should be executed first at some point (_not doing that takes a long time and says do it twice_). 
+`cabal install aeson` produces lots of warnings, some using the word "unsafe". Is this bad?
 
 S: `stack ghci --package=aeson` then run the same commands inside `ghci` as for MP.
 
@@ -84,15 +91,26 @@ N: `nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.aeson ])'`, run GHCi, 
 
 ## 7. Run HLint over HelloWorld. Note that haskell-src-exts requires happy to be available.
 
-MP: `cabal install hlint` then `hlint Main.hs`.
+MP: 
+```
+cabal install hlint
+hlint Main.hs
+```
 
 S: 
 
-N: `nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.hlint ])'`, then `hlint Main.hs`.
+N:
+```
+nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.hlint ])
+hlint Main.hs
+```
 
 ## 8. Run Hoogle. Note that network has a configure script, which may not always work on Windows.
 
-MP: `cabal install hoogle`.
+MP: 
+```
+cabal install hoogle
+```
 
 ```
 hoogle generate --insecure
@@ -111,6 +129,14 @@ N: `nix-channel --update`, then exit and re-enter any open nix-shells.  Note: "l
 
 ## 10. Use a package directly from github that isn't yet released to Hackage.
 
+MP:
+```
+git clone https://github.com/ryantrinkle/NotOnHackage
+cd NotOnHackage
+cabal install
+```
+Using sandboxes you can also `cabal sandbox add-source NotOnHackage`.
+
 N:
 
 ```
@@ -125,7 +151,7 @@ In the `packages` section of the `stack.yaml`, add the following:
 
 ```
 - location:
-    git: https://path/to/my/repo
+    git: https://github.com/ryantrinkle/NotOnHackage
     commit: <some commit or branch name>
   extra-dep: true
 ```
