@@ -210,17 +210,30 @@ N: See "Get a stack trace"; then, proceed with standard GHC commands.
 
 ## 13. Switch between multiple compiler versions
 
-N: `nix-shell -p haskell.packages.ghc7103.ghc`.  _The syntax is not as clean as the normal one; perhaps ghc7103 could be added as a top-level package in nixpkgs._
+MP:
+```
+activate-hs
+```
+
+N:
+```
+nix-shell -p haskell.packages.ghc7103.ghc
+```
+_The syntax is not as clean as the normal one; perhaps ghc7103 could be added as a top-level package in nixpkgs._
 
 S: Stack uses resolvers to compile with certain versions of the compiler.
 
 e.g. to build with ghc 7.8.4:
 
-`stack build --resolver lts-2.22`
+```
+stack build --resolver lts-2.22
+````
 
 or ghc 7.10.3:
 
-`stack build --resolver lts-6.30`
+```
+stack build --resolver lts-6.30
+```
 
 see [stackage](https://www.stackage.org/) for the list of resolver
 
