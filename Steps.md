@@ -13,7 +13,7 @@ The examples are deliberately concrete, referring to specific projects, to ident
 
 To give specific instructions, I'm using the acronyms "MP" for minimal platform, "S" for Stack, and "N" for Nix. I'm using "Win"/"Lin"/"Mac" when I have reason to believe the instructions are not the same. I've put things that suck in _italics_. Things that are not prefixed are common to all approaches.
 
-## Get "Haskell"
+## 1. Get "Haskell"
 
 MP-Win: Go to https://www.haskell.org/platform/windows.html. Choose 64bit (_or 32bit_). Run the installer. _Modify your cabal config file._ Start WinGHCi (_which means Win users have a different experience - it's 2009 code hosted on code.google - a terrible impression - and doesn't get indexed by the Start Menu for some reason - let's pretend this didn't happen)._ _Goes through 2 installers (Stack and other)._ _Requires admin._ _Install process is very slow (should benchmark properly)._
 
@@ -21,7 +21,7 @@ S: Download stack from https://docs.haskellstack.org/en/stable/install_and_upgra
 
 N: `nix-shell -p ghc` (to use it from a subshell) or `nix-env -i ghc` (to install it in the user's environment).  _Using the name `haskell` instead of `ghc` in either case produces an error._ _Works on Mac/Linux; does not support Windows at all._
 
-## Execute 1+1 in GHCi
+## 2. Execute 1+1 in GHCi
 
 MP: On the console type `ghci`. Type 1+1.
 
@@ -29,7 +29,7 @@ S: On the console type `stack ghci`. Type 1+1.
 
 N: Same as MP.
 
-## Create a file HelloWorld with `main = putStrLn "Hello world"` and run it.
+## 3. Create a file HelloWorld with `main = putStrLn "Hello world"` and run it.
 
 MP: Save file as HelloWorld.hs. Type `runhaskell HelloWorld.hs`.
 
@@ -37,7 +37,7 @@ S: Save file as HelloWorld.hs Type `stack runhaskell HelloWorld.hs`
 
 N: Same as MP.
 
-## Create a haskell program and run it as a script (OSX, Linux, BSD only)
+## 4. Create a haskell program and run it as a script (OSX, Linux, BSD only)
 
 MP: Create a file HelloWorld.hs:
 
@@ -66,7 +66,7 @@ chmod +x HelloWorld.hs
 
 See [script-interpreter](https://docs.haskellstack.org/en/stable/GUIDE/#script-interpreter) for more documentation
 
-## Parse a JSON fragment in GHCi using the aeson library.
+## 5. Parse a JSON fragment in GHCi using the aeson library.
 
 MP: `cabal update` (_not doing that takes a long time and says do it twice_). `cabal install aeson` (_watch lots of warnings using the word "unsafe" scroll past_). `ghci`.
 
@@ -80,9 +80,9 @@ S: `stack ghci --package=aeson` then run the same commands inside `ghci` as for 
 
 N: `nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.aeson ])'`, run GHCi, and then run the same steps inside GHCi as for MP.  _Formulating this expression requires the user to understand a good deal of the nix programming language, and relies on proper escaping of the shell command argument, which is full of spaces and symbols._
 
-## Create a new project depending on aeson.
+## 6. Create a new project depending on aeson.
 
-## Run HLint over HelloWorld. Note that haskell-src-exts requires happy to be available.
+## 7. Run HLint over HelloWorld. Note that haskell-src-exts requires happy to be available.
 
 MP: `cabal install hlint` then `hlint Main.hs`.
 
@@ -90,7 +90,7 @@ S:
 
 N: `nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.hlint ])'`, then `hlint Main.hs`.
 
-## Run Hoogle. Note that network has a configure script, which may not always work on Windows.
+## 8. Run Hoogle. Note that network has a configure script, which may not always work on Windows.
 
 MP: `cabal install hoogle`.
 
@@ -103,13 +103,13 @@ _Insecure because the certificate bundle isn't found._
 
 N: `nix-shell -p 'haskellPackages.ghcWithPackages (p: [ p.hoogle ])'`, then same as MP, except there is no need for insecure.
 
-## Upgrade your version of HLint and Hoogle to the latest released version.
+## 9. Upgrade your version of HLint and Hoogle to the latest released version.
 
 S: Go to http://stackage.org and look up the latest nightly or LTS. Insert it into your `C:\Users\Neil\AppData\Roaming\stack\global-project\stack.yaml` file against the `resolver` line. Type `stack install hlint` as before.
 
 N: `nix-channel --update`, then exit and re-enter any open nix-shells.  Note: "latest released versions" in this case will mean "latest that have been certified and built by the channel maintainers".  _It is possible to build with newer releases, but requires a solid understanding of Nix._
 
-## Use a package directly from github that isn't yet released to Hackage.
+## 10. Use a package directly from github that isn't yet released to Hackage.
 
 N:
 
@@ -131,7 +131,7 @@ In the `packages` section of the `stack.yaml`, add the following:
 ```
 
 
-## Get a stack trace on errors for your project.
+## 11. Get a stack trace on errors for your project.
 
 N: `nix-shell -p '(haskellPackages.override { overrides = self: super: { mkDerivation = args: super.mkDerivation (args // { enableLibraryProfiling = true; enableExecutableProfiling = true; }); }; }).ghcWithPackages (p: [ p.aeson ])'`
 
@@ -139,11 +139,11 @@ _This is a non-starter for anyone without a heavy investment in Nix.  Even if yo
 
 S: build your project with profiling `stack build --profile` and run the program
 
-## Profile your project, both heap profiling and time profiling.
+## 12. Profile your project, both heap profiling and time profiling.
 
 N: See "Get a stack trace"; then, proceed with standard GHC commands.
 
-## Switch between multiple compiler versions
+## 13. Switch between multiple compiler versions
 
 N: `nix-shell -p haskell.packages.ghc7103.ghc`.  _The syntax is not as clean as the normal one; perhaps ghc7103 could be added as a top-level package in nixpkgs._
 
@@ -159,11 +159,11 @@ or ghc 7.10.3:
 
 see [stackage](https://www.stackage.org/) for the list of resolver
 
-## View local documentation.
+## 14. View local documentation.
 
 N: `nix-shell -p 'haskellPackages.ghcWithHoogle (p: [ p.aeson ])'` will build a local Hoogle database; local haddocks can be retrieved using `ghc-pkg field $packageName haddock-html`.
 
-## Deploy in a locked down environment
+## 15. Deploy in a locked down environment
 
 E.g. a company or university, where the system administrators may have rules about distro packages or website access.
 
@@ -179,7 +179,7 @@ or:
 
 S-Windows: TODO
 
-## Deploy to many users
+## 16. Deploy to many users
 
 E.g. a whole student classroom.
 
