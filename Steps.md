@@ -46,7 +46,7 @@ ghci
 $ 1 + 1
 ```
 
-## 3. Create a file HelloWorld with `main = putStrLn "Hello world"` and run it.
+## 3.1. Create a file HelloWorld with `main = putStrLn "Hello world"` and run it.
 
 Create `HelloWorld.hs` containing `main = putStrLn "Hello world"`.
 
@@ -64,6 +64,17 @@ N:
 ```
 runhaskell HelloWorld.hs
 ```
+
+## 3.2. Create a file HelloWorld with `main = putStrLn "Hello world"` and compile then run it.
+
+Create `HelloWorld.hs` containing `main = putStrLn "Hello world"`.
+
+MP: 
+```
+ghc --make HelloWorld.hs
+./HelloWorld
+```
+
 
 ## 4. Create a haskell program and run it as a script (OSX, Linux, BSD only)
 
@@ -238,3 +249,5 @@ S-Windows: TODO
 E.g. a whole student classroom.
 
 S: See "Deploy in a locked down environment", having no need for user priviledges and a really simple 1 line setup, this can be run by users directly as initial step of a setup/class/etc.
+
+
