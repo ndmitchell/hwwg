@@ -39,6 +39,15 @@ N: Same as MP.
 
 ## Create a haskell program and run it as a script (OSX, Linux, BSD only)
 
+MP: Create a file HelloWorld.hs:
+
+```haskell
+#!/usr/bin/runhaskell
+module Main where
+main = putStrLn "Hello World"
+```
+
+
 S: Create a file HelloWorld.hs:
 
 ```haskell
