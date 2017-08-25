@@ -245,6 +245,8 @@ N: `nix-shell -p 'haskellPackages.ghcWithHoogle (p: [ p.aeson ])'` will build a 
 
 E.g. a company or university, where the system administrators may have rules about distro packages or website access.
 
+HP: Not possible.
+
 N: https://nixos.org/wiki/How_to_install_nix_in_home_(on_another_distribution)
 
 S: Stack install without system priviledges provided its lightweight dependencies requirements are met. you just need to run the command:
@@ -261,6 +263,6 @@ S-Windows: TODO
 
 E.g. a whole student classroom.
 
+MP: Install as priviledged user, thus only a single userland instance of ghc, rather than one per user.
+
 S: See "Deploy in a locked down environment", having no need for user priviledges and a really simple 1 line setup, this can be run by users directly as initial step of a setup/class/etc.
-
-
