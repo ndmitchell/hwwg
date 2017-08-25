@@ -23,11 +23,28 @@ N: `nix-shell -p ghc` (to use it from a subshell) or `nix-env -i ghc` (to instal
 
 ## 2. Execute 1+1 in GHCi
 
-MP: On the console type `ghci`. Type 1+1.
+MP:
+```
+ghci
+```
+```
+$ 1 + 1
+```
+S: 
+```
+stack ghci
+```
+```
+$ 1 + 1
+```
 
-S: On the console type `stack ghci`. Type 1+1.
-
-N: Same as MP.
+N:
+```
+ghci
+```
+```
+$ 1 + 1
+```
 
 ## 3. Create a file HelloWorld with `main = putStrLn "Hello world"` and run it.
 
