@@ -48,11 +48,22 @@ $ 1 + 1
 
 ## 3. Create a file HelloWorld with `main = putStrLn "Hello world"` and run it.
 
-MP: Save file as HelloWorld.hs. Type `runhaskell HelloWorld.hs`.
+Create `HelloWorld.hs` containing `main = putStrLn "Hello world"`.
 
-S: Save file as HelloWorld.hs Type `stack runhaskell HelloWorld.hs`
+MP: 
+```
+runhaskell HelloWorld.hs
+```
 
-N: Same as MP.
+S:
+```
+stack runhaskell HelloWorld.hs
+```
+
+N:
+```
+runhaskell HelloWorld.hs
+```
 
 ## 4. Create a haskell program and run it as a script (OSX, Linux, BSD only)
 
